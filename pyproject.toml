@@ -24,6 +24,7 @@ djangorestframework-swagger = "^0.2.2"
 django-cors-headers = "^4.6.0"
 pillow = "^11.0.0"
 black = "^24.10.0"
+django-filter = "^24.3"
 
 
 [build-system]
