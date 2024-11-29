@@ -7,9 +7,19 @@ from users.models import User
 class UserAdmin(admin.ModelAdmin):
     """Регистрация пользователей в админке."""
 
-    list_display = ("id", "email", "role", "is_active", "password", "image", "phone")
+    list_display = (
+        "id",
+        "email",
+        "first_name",
+        "last_name",
+        "role",
+        "is_active",
+        "image",
+        "phone",
+    )
     list_filter = (
         "email",
+        "last_name",
         "role",
     )
-    search_fields = ("email",)
+    search_fields = ("email", "last_name",)
