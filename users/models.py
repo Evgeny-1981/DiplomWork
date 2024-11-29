@@ -36,7 +36,7 @@ class User(AbstractUser):
         return f"{self.email}, {self.role}"
 
     class Meta:
-        db_table = "user"
+        db_table = "users"
         verbose_name = "Пользователя"
         verbose_name_plural = "Пользователи"
         ordering = ("email", "role", )
