@@ -1,0 +1,65 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$rsGGMZoBGKmBpP8i13Ehtm$1sB2Er5wMqA8FRJEE7O3snuEseY9DPv2dg6URyffyMo=",
+      "last_login": "2024-11-29T08:42:01.181Z",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-11-29T08:41:25.498Z",
+      "first_name": "admin",
+      "last_name": "skypro",
+      "phone": null,
+      "email": "admin@sky.pro",
+      "role": "admin",
+      "image": "",
+      "token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$CVuS6gVLbyDYkkoU3fFzmn$Mhh07+P7nHKQbxcRlMntVi+tsKZoIYafu7dxCBSa3y0=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-29T10:52:56.245Z",
+      "first_name": null,
+      "last_name": null,
+      "phone": null,
+      "email": "dzhonni@yandex.ru",
+      "role": "user",
+      "image": "",
+      "token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$in1O4GtbbPzKwRP6YJdIEF$9FIIOdv3waKju/bDjx0w5HtaCuPl3poKfK+8YuqDe5U=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-29T11:04:14.660Z",
+      "first_name": null,
+      "last_name": null,
+      "phone": null,
+      "email": "next-i@yandex.ru",
+      "role": "user",
+      "image": "",
+      "token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
