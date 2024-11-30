@@ -19,7 +19,7 @@ class User(AbstractUser):
         max_length=150, verbose_name="Фамилия пользователя", **NULLABLE
     )
     phone = models.CharField(max_length=30, verbose_name="Номер телефона", **NULLABLE)
-    email = models.EmailField(unique=True, verbose_name="Электронная почта")
+    email = models.EmailField(max_length=255, unique=True, verbose_name="Электронная почта")
     role = models.CharField(
         max_length=10,
         choices=ROLE_CHOICES,
@@ -39,4 +39,4 @@ class User(AbstractUser):
         db_table = "users"
         verbose_name = "Пользователя"
         verbose_name_plural = "Пользователи"
-        ordering = ("email", "role", )
+        ordering = ("email", "role",)
