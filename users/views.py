@@ -8,6 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from users.models import User
 from users.permissions import IsOwnerProfile
@@ -27,9 +28,9 @@ class UserCreateAPIView(generics.CreateAPIView):
         user.save()
 
 
-class TokenObtainPairView(APIView):
+class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request):
-        username = request.data.get('email')
+        username = request.data.get('emaill')
         password = request.data.get('password')
 
         user = authenticate(username=username, password=password)
@@ -41,4 +42,4 @@ class TokenObtainPairView(APIView):
                 'access': str(refresh.access_token),
             })
         else:
-            return Response({'error': 'Неверные учетные данные, повторите попытку'}, status=401)
+            return Response({'Ошибка': 'Неверные учетные данные, повторите попытку'}, status=401)
