@@ -3,12 +3,12 @@ from rest_framework import generics, viewsets
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from users.permissions import IsAdmin, IsOwner
 from ads.models import Ad
 from feedbacks.models import Feedback
-from .paginators import AdPaginator
-from .serializers import AdDetailSerializer, CommentSerializer, AdSerializer
-from .serilazers import FeedbackSerializer
+from users.permissions import IsAdmin, IsOwner
+from ads.paginators import CustomPagination
+from ads.serilazers import AdDetailSerializer, AdSerializer
+from feedbacks.serilazers import FeedbackSerializer
 
 
 class AdCreateAPIView(generics.CreateAPIView):
@@ -31,7 +31,7 @@ class AdListAPIView(generics.ListAPIView):
     filter_backends = (SearchFilter,)
     search_fields = ("title", "description",)
     permission_classes = (AllowAny,)
-    pagination_class = AdPaginator
+    pagination_class = CustomPagination
 
 
 class AdRetrieveAPIView(generics.RetrieveAPIView):
@@ -68,13 +68,13 @@ class MyAdListAPIView(generics.ListAPIView):
         return queryset
 
 
-class CommentViewSet(viewsets.ModelViewSet):
+class FeedbackViewSet(viewsets.ModelViewSet):
     """Вьюсет для модели отзыва"""
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
 
     def perform_create(self, serializer):
-        """Привязываем отзыва к автору и объявлению"""
+        """Привязываем отзыв к автору и объявлению"""
         feedback = serializer.save()
         feedback.author = self.request.user
         feedback.ad = Ad.objects.get(pk=self.kwargs["ad_pk"])
@@ -88,11 +88,8 @@ class CommentViewSet(viewsets.ModelViewSet):
         return feedback_list
 
     def get_permissions(self):
-        """
-        Права на комментарии:
-        - авторизованный пользователь - создание / просмотр
-        - владелец и админ - редактирование / удаление
-        """
+        """Прописываем права на коментарии"""
+
         if self.action in ["create", "list", "retrieve"]:
             permission_classes = (IsAuthenticated,)
         elif self.action in ["update", "partial_update", "destroy"]:

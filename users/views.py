@@ -83,7 +83,7 @@ class PasswordResetView(generics.GenericAPIView):
 
 
 class ResetPassword(generics.GenericAPIView):
-    """Меняем пароль пользователю"""
+    """Меняем пароль пользователя"""
 
     serializer_class = ResetPasswordSerializer
     permission_classes = [AllowAny]
