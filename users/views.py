@@ -59,19 +59,18 @@ class PasswordResetView(generics.GenericAPIView):
             email = serializer.data['email']
 
             user = get_user_model().objects.get(email=email)
-            token_generator = PasswordResetTokenGenerator()
             uid = urlsafe_base64_encode(force_bytes(user.email))
-            token = token_generator.make_token(user)
+            token = PasswordResetTokenGenerator().make_token(user)
             user.token = token
             user.uid = uid
             user.save()
-            host = get_current_site(request)
+            url = get_current_site(request)
             # Создаем ссылку для сброса пароля
-            url = "http://{}/reset_password/{}/{}/".format(host, uid, token)
+            # url = "http://{}/{}/{}/".format(host, uid, token)
             # Отправляем письмо со ссылкой для сброса пароля
             send_mail(
-                subject="Запрос сброса пароля с сайта {}".format(host),
-                message="Для сброса пароля перейдите по ссылке: {}".format(url),
+                subject="Запрос сброса пароля с сайта {}".format(url),
+                message="Для сброса пароля перейдите по ссылке: http://{}/{}/{}/".format(url, uid, token),
                 from_email=EMAIL_HOST_USER,
                 recipient_list=[email],
                 fail_silently=False,
