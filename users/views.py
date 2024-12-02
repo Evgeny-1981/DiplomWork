@@ -59,7 +59,7 @@ class PasswordResetView(generics.GenericAPIView):
             email = serializer.data['email']
 
             user = get_user_model().objects.get(email=email)
-            uid = urlsafe_base64_encode(force_bytes(user.email))
+            uid = urlsafe_base64_encode(force_bytes(user.password))
             token = PasswordResetTokenGenerator().make_token(user)
             user.token = token
             user.uid = uid
@@ -98,6 +98,8 @@ class ResetPassword(generics.GenericAPIView):
         if user:
             new_password = request.data['new_password']
             user.set_password(new_password)
+            user.token = None
+            user.uid = None
             user.save()
             return Response('Пароль успешно обновлен')
         else:
