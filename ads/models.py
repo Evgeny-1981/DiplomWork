@@ -10,7 +10,7 @@ class Ad(models.Model):
 
     title = models.CharField(max_length=255, verbose_name='Название объявления')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Стоимость товара/услуги')
-    description = models.TextField(default='Автор пока не создал описания', verbose_name='Описание')
+    description = models.TextField(default='Автор пока не создал описания', verbose_name='Описание', **NULLABLE)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='owner',
                                verbose_name='Владелец объявления', **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания объявления',

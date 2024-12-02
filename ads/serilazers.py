@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from ads.models import Ad
 from feedbacks.models import Feedback
+from feedbacks.serilazers import FeedbackSerializer
 
 
 class AdSerializer(serializers.ModelSerializer):
@@ -11,12 +12,12 @@ class AdSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class FeedbackSerializer(serializers.ModelSerializer):
-    """Сериализатор для модели отзыва"""
-
-    class Meta:
-        model = Feedback
-        fields = '__all__'
+# class FeedbackSerializer(serializers.ModelSerializer):
+#     """Сериализатор для модели отзыва"""
+#
+#     class Meta:
+#         model = Feedback
+#         fields = '__all__'
 
 
 class AdDetailSerializer(serializers.ModelSerializer):
@@ -24,5 +25,5 @@ class AdDetailSerializer(serializers.ModelSerializer):
     feedback = FeedbackSerializer(source='feedback_ad', read_only=True, many=True)
 
     class Meta:
-        model = Feedback
+        model = Ad
         fields = '__all__'
