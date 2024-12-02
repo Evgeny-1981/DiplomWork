@@ -1,8 +1,9 @@
 from django.urls import path
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
-from users.views import CustomTokenObtainPairView
+
 from users.apps import UsersConfig
+from users.views import CustomTokenObtainPairView, PasswordResetView, ResetPassword
 from users.views import UserCreateAPIView
 
 app_name = UsersConfig.name
@@ -29,5 +30,7 @@ urlpatterns = [
         "token/verify/",
         TokenVerifyView.as_view(permission_classes=(AllowAny,)),
         name="token_verify",
-    )
+    ),
+    path('reset_password/', PasswordResetView.as_view()),
+    path('reset_password_confirm/', ResetPassword.as_view()),
 ]

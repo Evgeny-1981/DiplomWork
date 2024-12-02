@@ -1,18 +1,21 @@
+# добавил011202024
 from django.contrib.auth import authenticate
-from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from rest_framework import generics
 from rest_framework import permissions
-from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny
-from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from config.settings import EMAIL_HOST_USER
 from users.models import User
-from users.permissions import IsOwnerProfile
-from users.serilazers import UserSerializer
+from users.serilazers import UserSerializer, PasswordResetSerializer, ResetPasswordSerializer
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -30,7 +33,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request):
-        username = request.data.get('emaill')
+        username = request.data.get('email')
         password = request.data.get('password')
 
         user = authenticate(username=username, password=password)
@@ -42,4 +45,61 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 'access': str(refresh.access_token),
             })
         else:
-            return Response({'Ошибка': 'Неверные учетные данные, повторите попытку'}, status=401)
+            return Response('Неверные учетные данные, повторите попытку')
+
+
+# добавил01122024
+class PasswordResetView(generics.GenericAPIView):
+    serializer_class = PasswordResetSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            email = serializer.data['email']
+
+            user = get_user_model().objects.get(email=email)
+            token_generator = PasswordResetTokenGenerator()
+            uid = urlsafe_base64_encode(force_bytes(user.email))
+            token = token_generator.make_token(user)
+            user.token = token
+            user.uid = uid
+            user.save()
+            host = get_current_site(request)
+            # Создаем ссылку для сброса пароля
+            url = "http://{}/reset_password/{}/{}/".format(host, uid, token)
+            # Отправляем письмо со ссылкой для сброса пароля
+            send_mail(
+                subject="Запрос сброса пароля с сайта {}".format(host),
+                message="Для сброса пароля перейдите по ссылке: {}".format(url),
+                from_email=EMAIL_HOST_USER,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+
+            return Response("Ссылка для сброса пароля отправлена на вашу электронную почту.")
+
+        else:
+            return Response("Введен неверный адрес электронной почты, повторите попытку.")
+
+
+class ResetPassword(generics.GenericAPIView):
+    """Меняем пароль пользователю"""
+
+    serializer_class = ResetPasswordSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        token = request.data['token']
+        reset_obj = User.objects.filter(token=token).first()
+        if not reset_obj:
+            return Response('Неверный токен', status=400)
+        uid = request.data['uid']
+        user = User.objects.filter(uid=uid).first()
+        if user:
+            new_password = request.data['new_password']
+            user.set_password(new_password)
+            user.save()
+            return Response('Пароль успешно обновлен')
+        else:
+            return Response('Пользователь не найден')

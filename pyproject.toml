@@ -25,6 +25,8 @@ django-cors-headers = "^4.6.0"
 pillow = "^11.0.0"
 black = "^24.10.0"
 django-filter = "^24.3"
+django-autoslug = "^1.9.9"
+django-uuid-primary-key = "^1.1.0"
 
 
 [build-system]
