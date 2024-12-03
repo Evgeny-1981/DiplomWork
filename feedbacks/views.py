@@ -71,6 +71,5 @@ class MyFeedbackListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         """Метод для получения списка отзывов пользователя"""
-
         author = self.request.user
         return super().get_queryset().filter(author=author)

@@ -9,19 +9,19 @@ class UserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class PasswordResetSerializer(serializers.ModelSerializer):
+class PasswordResetRequestSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
 
     class Meta:
         model = User
-        fields = ['email']
+        fields = ["email"]
 
     def validate(self, data):
-        email = data['email']
+        email = data["email"]
         if not User.objects.filter(email=email).exists():
-            raise serializers.ValidationError({'email': 'Указанный email не найден.'})
+            raise serializers.ValidationError({"email": "Указанный email не найден."})
         return data
 
 
-class ResetPasswordSerializer(serializers.Serializer):
+class PasswordResetSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True, min_length=8)

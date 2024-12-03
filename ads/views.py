@@ -4,13 +4,14 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from ads.models import Ad
 from ads.paginators import CustomPagination
-from ads.serilazers import AdDetailSerializer, AdSerializer
+from ads.serilazers import AdSerializer
 from users.permissions import IsAdmin, IsOwner
 
 
 class AdCreateAPIView(generics.CreateAPIView):
     """Контроллер для создания объявления."""
-    serializer_class = AdDetailSerializer
+
+    serializer_class = AdSerializer
     queryset = Ad.objects.all()
     permission_classes = [IsAuthenticated]
 
@@ -23,40 +24,57 @@ class AdCreateAPIView(generics.CreateAPIView):
 
 class AdListAPIView(generics.ListAPIView):
     """Контроллер для просмотра списка всех объявлений"""
+
     serializer_class = AdSerializer
     permission_classes = [AllowAny]
     queryset = Ad.objects.all()
     filter_backends = (SearchFilter,)
-    search_fields = ("title", "description",)
+    search_fields = (
+        "title",
+        "description",
+    )
     pagination_class = CustomPagination
 
 
 class AdRetrieveAPIView(generics.RetrieveAPIView):
     """Контроллер для просмотра объявления"""
-    serializer_class = AdDetailSerializer
+
+    serializer_class = AdSerializer
     queryset = Ad.objects.all()
     permission_classes = [AllowAny]
 
 
 class AdUpdateAPIView(generics.UpdateAPIView):
     """Контроллер для изменения объявления"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner | IsAdmin,)
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner | IsAdmin,
+    )
 
 
 class AdDestroyAPIView(generics.DestroyAPIView):
     """Контроллер для удаления объявления"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner | IsAdmin,)
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner | IsAdmin,
+    )
 
 
 class MyAdListAPIView(generics.ListAPIView):
     """Контроллер для просмотра списка объявлений пользователя"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner,)
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner,
+    )
     pagination_class = CustomPagination
 
     # def get_queryset(self):

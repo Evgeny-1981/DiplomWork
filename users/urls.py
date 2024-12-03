@@ -4,7 +4,11 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 from users.apps import UsersConfig
-from users.views import CustomTokenObtainPairView, PasswordResetView, ResetPassword
+from users.views import (
+    CustomTokenObtainPairView,
+    PasswordResetRequestView,
+    PasswordResetView,
+)
 from users.views import UserCreateAPIView
 
 app_name = UsersConfig.name
@@ -32,6 +36,6 @@ urlpatterns = [
         TokenVerifyView.as_view(permission_classes=(AllowAny,)),
         name="token_verify",
     ),
-    path('reset_password/', PasswordResetView.as_view()),
-    path('reset_password_confirm/<str:uid>/<str:token>/', ResetPassword.as_view()),
+    path("reset_password/", PasswordResetRequestView.as_view()),
+    path("reset_password_confirm/<str:uid>/<str:token>/", PasswordResetView.as_view()),
 ]
