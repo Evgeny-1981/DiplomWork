@@ -10,7 +10,7 @@ app_name = AdsConfig.name
 router = DefaultRouter()
 
 urlpatterns = [
-                  path("feedbacks/", include("feedbacks.urls", namespace="feedbacks")),
+                  path("<int:pk>/feedbacks/", include("feedbacks.urls", namespace="feedbacks")),
                   path('list/', AdListAPIView.as_view(), name='ad_list'),
                   path('create/', AdCreateAPIView.as_view(), name='ad_create'),
                   path('my_list_ads/', MyAdListAPIView.as_view(), name='ad_mylist'),

@@ -12,9 +12,9 @@ class Feedback(models.Model):
 
     text = models.TextField(max_length=400, verbose_name='Текст отзыва', )
     author = models.ForeignKey(User, related_name='user_feedback', on_delete=models.CASCADE,
-                               verbose_name='Пользователь, оставивший отзыв', )
+                               verbose_name='Пользователь, оставивший отзыв', **NULLABLE)
     ad = models.ForeignKey(Ad, related_name='ad_feedback', on_delete=models.CASCADE,
-                           verbose_name='Объявление, под которым оставлен отзыв', )
+                           verbose_name='Объявление, под которым оставлен отзыв', **NULLABLE)
     created_at = models.DateTimeField(default=timezone.now, verbose_name='Дата и время отзыва', )
 
     def __str__(self):

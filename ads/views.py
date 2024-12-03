@@ -35,7 +35,7 @@ class AdRetrieveAPIView(generics.RetrieveAPIView):
     """Контроллер для просмотра объявления"""
     serializer_class = AdDetailSerializer
     queryset = Ad.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner | IsAdmin)
+    permission_classes = [AllowAny]
 
 
 class AdUpdateAPIView(generics.UpdateAPIView):

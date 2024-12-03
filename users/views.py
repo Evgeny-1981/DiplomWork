@@ -92,8 +92,8 @@ class ResetPassword(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         token = self.kwargs.get('token')
-        reset_obj = User.objects.filter(token=token).first()
-        if not reset_obj:
+        object_reset = User.objects.filter(token=token).first()
+        if not object_reset:
             return Response('Неверный токен', status=400)
         uid = self.kwargs.get('uid')
         user = User.objects.filter(uid=uid).first()
