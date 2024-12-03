@@ -83,6 +83,7 @@ class MyAdListAPIView(generics.ListAPIView):
     #     user = self.request.user
     #     queryset = Ad.objects.filter(author=user)
     #     return queryset
+    #
 
     def get_queryset(self):
         """Список объявлений автора"""
