@@ -1,14 +1,19 @@
 from django.urls import path
 from rest_framework.permissions import AllowAny
+from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
-# from views import TokenObtainPairView
 
 from users.apps import UsersConfig
-from users.views import UserCreateAPIView, TokenObtainPairView
+from users.views import (
+    CustomTokenObtainPairView,
+    PasswordResetRequestView,
+    PasswordResetView,
+)
+from users.views import UserCreateAPIView
 
 app_name = UsersConfig.name
 
-# router = DefaultRouter()
+router = DefaultRouter()
 
 urlpatterns = [
     path(
@@ -18,7 +23,7 @@ urlpatterns = [
     ),
     path(
         "login/",
-        TokenObtainPairView.as_view(permission_classes=(AllowAny,)),
+        CustomTokenObtainPairView.as_view(permission_classes=(AllowAny,)),
         name="login",
     ),
     path(
@@ -30,5 +35,7 @@ urlpatterns = [
         "token/verify/",
         TokenVerifyView.as_view(permission_classes=(AllowAny,)),
         name="token_verify",
-    )
+    ),
+    path("reset_password/", PasswordResetRequestView.as_view()),
+    path("reset_password_confirm/<str:uid>/<str:token>/", PasswordResetView.as_view()),
 ]

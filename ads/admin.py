@@ -21,4 +21,4 @@ class AdAdmin(admin.ModelAdmin):
         "author",
         "created_at",
     )
-    search_fields = ("title", "description",)
+    # search_fields = ("title", "description",)
