@@ -24,8 +24,8 @@ from users.serilazers import (
 class UserCreateAPIView(generics.CreateAPIView):
     """Класс для создания пользователя"""
 
-    serializer_class = UserSerializer
     queryset = User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
 
     def perform_create(self, serializer):

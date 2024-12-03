@@ -12,8 +12,9 @@ from users.permissions import IsAdmin, IsOwner
 
 class FeedbackCreateAPIView(generics.CreateAPIView):
     """Контроллер для создания отзыва"""
-    serializer_class = FeedbackSerializer
+
     queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
 
     # permission_classes = (IsAuthenticated,)
 
@@ -28,8 +29,9 @@ class FeedbackCreateAPIView(generics.CreateAPIView):
 
 class FeedbackListAPIView(generics.ListAPIView):
     """Контроллер для просмотра всех отзывов объявления"""
-    serializer_class = AdDetailSerializer
+
     queryset = Feedback.objects.all()
+    serializer_class = AdDetailSerializer
     permission_classes = (IsAuthenticated,)
     pagination_class = CustomPagination
 
@@ -43,30 +45,43 @@ class FeedbackListAPIView(generics.ListAPIView):
 
 class FeedbackRetrieveAPIView(generics.RetrieveAPIView):
     """Контроллер для просмотра одного отзыва"""
-    serializer_class = FeedbackSerializer
+
     queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
     permission_classes = (IsAuthenticated,)
 
 
 class FeedbackUpdateAPIView(generics.UpdateAPIView):
     """Контроллер для изменения отзыва"""
+
     serializer_class = FeedbackSerializer
     queryset = Feedback.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner | IsAdmin,)
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner | IsAdmin,
+    )
 
 
 class FeedbackDestroyAPIView(generics.DestroyAPIView):
     """Контроллер для удаления отзыва"""
-    serializer_class = FeedbackSerializer
+
     queryset = Feedback.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner | IsAdmin,)
+    serializer_class = FeedbackSerializer
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner | IsAdmin,
+    )
 
 
 class MyFeedbackListAPIView(generics.ListAPIView):
     """Контроллер для просмотра списка отзывов пользователя"""
-    serializer_class = FeedbackSerializer
+
     queryset = Feedback.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner,)
+    serializer_class = FeedbackSerializer
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner,
+    )
     pagination_class = CustomPagination
 
     def get_queryset(self):
