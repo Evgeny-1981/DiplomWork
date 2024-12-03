@@ -79,7 +79,7 @@ class MyAdListAPIView(generics.ListAPIView):
     pagination_class = CustomPagination
 
     # def get_queryset(self):
-    #     """Список объявленй автора"""
+    #     """Список объявлений автора"""
     #     user = self.request.user
     #     queryset = Ad.objects.filter(author=user)
     #     return queryset
