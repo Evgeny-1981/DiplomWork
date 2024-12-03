@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "a5f53dda-1be8-4897-a7ea-02bdf6ab57b5",
+		"name": "SB1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37118774"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"dzhonni@yandex.ru\",\n    \"password\": \"1238\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"dzhonni@yandex.ru\",\n    \"password\": \"1238\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reset_password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"dzhonni@yandex.ru\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/reset_password/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"reset_password",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reset_password_confirm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"new_password\": \"1111\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/reset_password_confirm/cGJrZGYyX3NoYTI1NiQ4NzAwMDAkOVI2TGhjc0gxQTZFenFVVmJsejJ5aiR2UW1BZjh6NlBKSTJlSWpJWktTdis4YmpwWlVrTThqVkJ5a0ROVENKaC9RPQ/chh7ao-515fb6157459624637af704937885b2a/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"reset_password_confirm",
+						"cGJrZGYyX3NoYTI1NiQ4NzAwMDAkOVI2TGhjc0gxQTZFenFVVmJsejJ5aiR2UW1BZjh6NlBKSTJlSWpJWktTdis4YmpwWlVrTThqVkJ5a0ROVENKaC9RPQ",
+						"chh7ao-515fb6157459624637af704937885b2a",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_ad_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjQxNjk1LCJpYXQiOjE3MzMyMzQ0OTUsImp0aSI6IjU2YmIxZWQ5NDk2MzQzYjI5M2E2MzM4NWU2ZTAyMjQ4IiwidXNlcl9pZCI6NH0.ypAPKdQf8_ocYb5NsVKnnGwVIYWNwwdXNJgq2Zleupw",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/list?search=Объявление_test",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"list"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Объявление_test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_ad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjQxNjk1LCJpYXQiOjE3MzMyMzQ0OTUsImp0aSI6IjU2YmIxZWQ5NDk2MzQzYjI5M2E2MzM4NWU2ZTAyMjQ4IiwidXNlcl9pZCI6NH0.ypAPKdQf8_ocYb5NsVKnnGwVIYWNwwdXNJgq2Zleupw",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/list?search=Объявление 6",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"list"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Объявление 6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "my_ads",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjQxNjk1LCJpYXQiOjE3MzMyMzQ0OTUsImp0aSI6IjU2YmIxZWQ5NDk2MzQzYjI5M2E2MzM4NWU2ZTAyMjQ4IiwidXNlcl9pZCI6NH0.ypAPKdQf8_ocYb5NsVKnnGwVIYWNwwdXNJgq2Zleupw",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/my_ads/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"my_ads",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_ad",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjE5NTc4LCJpYXQiOjE3MzMyMTcxNzgsImp0aSI6ImRmYmQ1ZmU5MDU2OTQ1YmE5YTFiMTYyYzgzZmI2M2U5IiwidXNlcl9pZCI6NH0.3epir3FLsykKLzKhA3LQ8B9lsomtyA1H3klRONRe5X0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Объявление 6\",\n    \"price\": \"3500\",\n    \"description\": \"Объявление о продаже термоса\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrive_ad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjMzODAxLCJpYXQiOjE3MzMyMzE0MDEsImp0aSI6IjgxMjE0ZmIwNWE4MTQ1ZjJhY2ZkYmY4NmYzMzU4MWVkIiwidXNlcl9pZCI6NH0.2xxbLvhruG1_stvj5heUznO9cXLpekbK6jPfJNm8p1Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Объявление 6\",\n    \"price\": \"3500\",\n    \"description\": \"Объявление о продаже термоса\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/4/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_ad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjMzODAxLCJpYXQiOjE3MzMyMzE0MDEsImp0aSI6IjgxMjE0ZmIwNWE4MTQ1ZjJhY2ZkYmY4NmYzMzU4MWVkIiwidXNlcl9pZCI6NH0.2xxbLvhruG1_stvj5heUznO9cXLpekbK6jPfJNm8p1Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Объявление 6\",\n    \"price\": \"3500\",\n    \"description\": \"Объявление о продаже термоса\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/4/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_ad",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjMzODAxLCJpYXQiOjE3MzMyMzE0MDEsImp0aSI6IjgxMjE0ZmIwNWE4MTQ1ZjJhY2ZkYmY4NmYzMzU4MWVkIiwidXNlcl9pZCI6NH0.2xxbLvhruG1_stvj5heUznO9cXLpekbK6jPfJNm8p1Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Объявление 6\",\n    \"price\": \"3500\",\n    \"description\": \"Объявление о продаже термоса\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/4/delete/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"4",
+						"delete",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "feedbacks_list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjU0ODY0LCJpYXQiOjE3MzMyNDc2NjQsImp0aSI6ImQ3MWYwNjQ3NWY3YzRhNjI4MjZkOTliMGVhZTdjNDQ1IiwidXNlcl9pZCI6NH0.hNo-FgZmfnR5_kVbO8I2lbzn62dL--NaLOBS8ewPPPs",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/9/feedbacks/list/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"9",
+						"feedbacks",
+						"list",
+						""
+					],
+					"query": [
+						{
+							"key": "A",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "feedbacks_create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjU0ODY0LCJpYXQiOjE3MzMyNDc2NjQsImp0aSI6ImQ3MWYwNjQ3NWY3YzRhNjI4MjZkOTliMGVhZTdjNDQ1IiwidXNlcl9pZCI6NH0.hNo-FgZmfnR5_kVbO8I2lbzn62dL--NaLOBS8ewPPPs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Отзыв 555\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/5/feedbacks/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"5",
+						"feedbacks",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "feedbacks_delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjU0ODY0LCJpYXQiOjE3MzMyNDc2NjQsImp0aSI6ImQ3MWYwNjQ3NWY3YzRhNjI4MjZkOTliMGVhZTdjNDQ1IiwidXNlcl9pZCI6NH0.hNo-FgZmfnR5_kVbO8I2lbzn62dL--NaLOBS8ewPPPs",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/9/feedbacks/17/delete/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"9",
+						"feedbacks",
+						"17",
+						"delete",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "feedbacks_retrive",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjU0ODY0LCJpYXQiOjE3MzMyNDc2NjQsImp0aSI6ImQ3MWYwNjQ3NWY3YzRhNjI4MjZkOTliMGVhZTdjNDQ1IiwidXNlcl9pZCI6NH0.hNo-FgZmfnR5_kVbO8I2lbzn62dL--NaLOBS8ewPPPs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/5/feedbacks/11/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"5",
+						"feedbacks",
+						"11",
+						""
+					],
+					"query": [
+						{
+							"key": "A",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "feedbacks_update",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjU0ODY0LCJpYXQiOjE3MzMyNDc2NjQsImp0aSI6ImQ3MWYwNjQ3NWY3YzRhNjI4MjZkOTliMGVhZTdjNDQ1IiwidXNlcl9pZCI6NH0.hNo-FgZmfnR5_kVbO8I2lbzn62dL--NaLOBS8ewPPPs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"qazxsw\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ads/5/feedbacks/16/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ads",
+						"5",
+						"feedbacks",
+						"16",
+						"update",
+						""
+					],
+					"query": [
+						{
+							"key": "A",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
