@@ -1,8 +1,6 @@
-# добавил01122024
 from rest_framework import serializers
 
 from users.models import User
-from users.validators import PasswordLengthValidator
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -11,7 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# добавил 01122024
 class PasswordResetSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
 

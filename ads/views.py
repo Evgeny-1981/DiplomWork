@@ -1,12 +1,11 @@
-from django.shortcuts import get_object_or_404
-from rest_framework import generics, viewsets
+from rest_framework import generics
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from ads.models import Ad
-from users.permissions import IsAdmin, IsOwner
 from ads.paginators import CustomPagination
 from ads.serilazers import AdDetailSerializer, AdSerializer
+from users.permissions import IsAdmin, IsOwner
 
 
 class AdCreateAPIView(generics.CreateAPIView):
@@ -29,7 +28,6 @@ class AdListAPIView(generics.ListAPIView):
     queryset = Ad.objects.all()
     filter_backends = (SearchFilter,)
     search_fields = ("title", "description",)
-    permission_classes = (AllowAny,)
     pagination_class = CustomPagination
 
 
@@ -37,7 +35,7 @@ class AdRetrieveAPIView(generics.RetrieveAPIView):
     """Контроллер для просмотра объявления"""
     serializer_class = AdDetailSerializer
     queryset = Ad.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwner | IsAdmin)
 
 
 class AdUpdateAPIView(generics.UpdateAPIView):
@@ -59,9 +57,16 @@ class MyAdListAPIView(generics.ListAPIView):
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
     permission_classes = (IsAuthenticated, IsOwner,)
+    pagination_class = CustomPagination
+
+    # def get_queryset(self):
+    #     """Список объявлений автора"""
+    #     user = self.request.user
+    #     queryset = Ad.objects.filter(author=user)
+    #     return queryset
 
     def get_queryset(self):
         """Список объявлений автора"""
+
         user = self.request.user
-        queryset = Ad.objects.filter(author=user)
-        return queryset
+        return super().get_queryset().filter(author=user)

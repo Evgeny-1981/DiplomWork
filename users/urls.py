@@ -33,5 +33,5 @@ urlpatterns = [
         name="token_verify",
     ),
     path('reset_password/', PasswordResetView.as_view()),
-    path('reset_password_confirm/', ResetPassword.as_view()),
+    path('reset_password_confirm/<str:uid>/<str:token>/', ResetPassword.as_view()),
 ]

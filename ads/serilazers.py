@@ -1,6 +1,6 @@
 from rest_framework import serializers
+
 from ads.models import Ad
-from feedbacks.models import Feedback
 from feedbacks.serilazers import FeedbackSerializer
 
 
@@ -10,14 +10,7 @@ class AdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ad
         fields = '__all__'
-
-
-# class FeedbackSerializer(serializers.ModelSerializer):
-#     """Сериализатор для модели отзыва"""
-#
-#     class Meta:
-#         model = Feedback
-#         fields = '__all__'
+        search_fields = ("title", "description",)
 
 
 class AdDetailSerializer(serializers.ModelSerializer):

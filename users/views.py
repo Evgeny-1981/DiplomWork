@@ -1,4 +1,3 @@
-# добавил011202024
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -65,12 +64,15 @@ class PasswordResetView(generics.GenericAPIView):
             user.uid = uid
             user.save()
             url = get_current_site(request)
+            confirm_url = "users/reset_password_confirm"
             # Создаем ссылку для сброса пароля
             # url = "http://{}/{}/{}/".format(host, uid, token)
             # Отправляем письмо со ссылкой для сброса пароля
             send_mail(
                 subject="Запрос сброса пароля с сайта {}".format(url),
-                message="Для сброса пароля перейдите по ссылке: http://{}/{}/{}/".format(url, uid, token),
+                message="Для сброса пароля перейдите по ссылке: http://{}/{}/{}/{}/".format(url,
+                                                                                            confirm_url, uid,
+                                                                                            token),
                 from_email=EMAIL_HOST_USER,
                 recipient_list=[email],
                 fail_silently=False,
@@ -88,16 +90,16 @@ class ResetPassword(generics.GenericAPIView):
     serializer_class = ResetPasswordSerializer
     permission_classes = [AllowAny]
 
-    def post(self, request):
-        token = request.data['token']
+    def post(self, request, *args, **kwargs):
+        token = self.kwargs.get('token')
         reset_obj = User.objects.filter(token=token).first()
         if not reset_obj:
             return Response('Неверный токен', status=400)
-        uid = request.data['uid']
+        uid = self.kwargs.get('uid')
         user = User.objects.filter(uid=uid).first()
         if user:
-            new_password = request.data['new_password']
-            user.set_password(new_password)
+            password = request.data['new_password']
+            user.set_password(password)
             user.token = None
             user.uid = None
             user.save()

@@ -1,40 +1,68 @@
-from django.shortcuts import get_object_or_404
-from rest_framework import generics, viewsets
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
-from ads.models import Ad
-from feedbacks.models import Feedback
-from users.permissions import IsAdmin, IsOwner
 from ads.paginators import CustomPagination
-from ads.serilazers import AdDetailSerializer, AdSerializer
+from feedbacks.models import Feedback
 from feedbacks.serilazers import FeedbackSerializer
+from users.permissions import IsAdmin, IsOwner
 
 
-class FeedbackViewSet(viewsets.ModelViewSet):
-    """Вьюсет для модели отзыва"""
-    queryset = Feedback.objects.all()
+class FeedbackCreateAPIView(generics.CreateAPIView):
+    """Контроллер для создания отзыва"""
     serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         """Привязываем отзыв к автору и объявлению"""
         feedback = serializer.save()
         feedback.author = self.request.user
-        feedback.ad = Ad.objects.get(pk=self.kwargs["ad_pk"])
+        print(feedback.ad)
         feedback.save()
 
+
+class FeedbackListAPIView(generics.ListAPIView):
+    """Контроллер для просмотра всех отзывов"""
+    serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
+    permission_classes = (IsAuthenticated,)
+    pagination_class = CustomPagination
+
+    # def get_queryset(self):
+    #     """Метод для получения отзывов объявления"""
+    #     pass
+
+
+class FeedbackRetrieveAPIView(generics.RetrieveAPIView):
+    """Контроллер для просмотра одного отзыва"""
+    serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
+    permission_classes = (IsAuthenticated, IsOwner | IsAdmin,)
+
+
+class FeedbackUpdateAPIView(generics.UpdateAPIView):
+    """Контроллер для изменения отзыва"""
+    serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
+    permission_classes = (IsAuthenticated, IsOwner | IsAdmin,)
+
+
+class FeedbackDestroyAPIView(generics.DestroyAPIView):
+    """Контроллер для удаления отзыва"""
+    serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
+    permission_classes = (IsAuthenticated, IsOwner | IsAdmin,)
+
+
+class MyFeedbackListAPIView(generics.ListAPIView):
+    """Контроллер для просмотра списка отзывов пользователя"""
+    serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
+    permission_classes = (IsAuthenticated, IsOwner,)
+    pagination_class = CustomPagination
+
     def get_queryset(self):
-        """Метод для получения отзывов объявления"""
-        ad_pk = self.kwargs.get("ad_pk")
-        ad = get_object_or_404(Ad, id=ad_pk)
-        feedback_list = ad.feedback_ad.all()
-        return feedback_list
+        """Метод для получения списка отзывов пользователя"""
 
-    def get_permissions(self):
-        """Прописываем права на коментарии"""
-
-        if self.action in ["create", "list", "retrieve"]:
-            permission_classes = (IsAuthenticated,)
-        elif self.action in ["update", "partial_update", "destroy"]:
-            permission_classes = (IsAuthenticated, IsAdmin | IsOwner,)
-        for permission in permission_classes:
-            return permission()
+        author = self.request.user
+        return super().get_queryset().filter(author=author)
