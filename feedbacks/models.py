@@ -10,18 +10,37 @@ NULLABLE = {"blank": True, "null": True}
 class Feedback(models.Model):
     """Создание модели отзыва"""
 
-    text = models.TextField(max_length=400, verbose_name='Текст отзыва', )
-    author = models.ForeignKey(User, related_name='user_feedback', on_delete=models.CASCADE,
-                               verbose_name='Пользователь, оставивший отзыв', **NULLABLE)
-    ad = models.ForeignKey(Ad, related_name='ad_feedback', on_delete=models.CASCADE,
-                           verbose_name='Объявление, под которым оставлен отзыв', **NULLABLE)
-    created_at = models.DateTimeField(default=timezone.now, verbose_name='Дата и время отзыва', )
+    text = models.TextField(
+        max_length=400,
+        verbose_name="Текст отзыва",
+    )
+    author = models.ForeignKey(
+        User,
+        related_name="user_feedback",
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь, оставивший отзыв",
+        **NULLABLE,
+    )
+    ad = models.ForeignKey(
+        Ad,
+        related_name="ad_feedback",
+        on_delete=models.CASCADE,
+        verbose_name="Объявление, под которым оставлен отзыв",
+        **NULLABLE,
+    )
+    created_at = models.DateTimeField(
+        default=timezone.now,
+        verbose_name="Дата и время отзыва",
+    )
 
     def __str__(self):
-        return f'Отзыв об {self.ad} от {self.author} опубликован {self.created_at}'
+        return f"Отзыв от {self.author} опубликован {self.created_at}"
 
     class Meta:
         db_table = "feedbacks"
-        verbose_name = 'Отзыв'
-        verbose_name_plural = 'Отзывы'
-        ordering = ('author', 'created_at',)
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        ordering = (
+            "author",
+            "created_at",
+        )

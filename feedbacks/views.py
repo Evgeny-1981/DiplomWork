@@ -1,5 +1,5 @@
+from django.http import Http404
 from rest_framework import generics
-from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
 from ads.models import Ad
@@ -38,7 +38,10 @@ class FeedbackListAPIView(generics.ListAPIView):
     def get_queryset(self):
         """Метод для получения отзывов объявления"""
         pk = self.kwargs.get("pk")
-        ad = get_object_or_404(Ad, id=pk)
+        try:
+            ad = Ad.objects.get(id=pk)
+        except Ad.DoesNotExist:
+            raise Http404("Указанного объявления не существует.")
         feedbacks_list = ad.ad_feedback.all()
         return feedbacks_list
 
