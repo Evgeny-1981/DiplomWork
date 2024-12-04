@@ -36,6 +36,10 @@ urlpatterns = [
         TokenVerifyView.as_view(permission_classes=(AllowAny,)),
         name="token_verify",
     ),
-    path("reset_password/", PasswordResetRequestView.as_view()),
-    path("reset_password_confirm/<str:uid>/<str:token>/", PasswordResetView.as_view()),
+    path("reset_password/", PasswordResetRequestView.as_view(), name="password_reset"),
+    path(
+        "reset_password_confirm/<str:uid>/<str:token>/",
+        PasswordResetView.as_view(),
+        name="reset_password_confirm",
+    ),
 ]
