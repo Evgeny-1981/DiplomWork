@@ -49,11 +49,11 @@ class AdTestCase(APITestCase):
             "previous": None,
             "results": [
                 {
-                    "id": 1,
+                    "id": self.ad.pk,
                     "title": "Тестовое объявление №1",
                     "price": 1000,
-                    "description": "Тестовый отзыв об объявлении №1",
-                    "created_at": "2024-12-04T15:00:00Z",
+                    "description": "Тестовое описание об объявлении №1",
+                    "created_at": self.ad.created_at,
                     "author": self.user.pk,
                 }
             ],

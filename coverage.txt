@@ -24,7 +24,7 @@ ads/urls.py                                                                     
 ads/views.py                                                                        43      2    95%
 config/__init__.py                                                                   0      0   100%
 config/asgi.py                                                                       4      4     0%
-config/settings.py                                                                  40      0   100%
+config/settings.py                                                                  39      0   100%
 config/urls.py                                                                       7      0   100%
 config/wsgi.py                                                                       4      4     0%
 feedbacks/__init__.py                                                                0      0   100%
@@ -35,7 +35,7 @@ feedbacks/migrations/0002_alter_feedback_created_at_alter_feedback_text.py      
 feedbacks/migrations/__init__.py                                                     0      0   100%
 feedbacks/models.py                                                                 17      1    94%
 feedbacks/serilazers.py                                                              6      0   100%
-feedbacks/tests.py                                                                  49     10    80%
+feedbacks/tests.py                                                                  49      0   100%
 feedbacks/urls.py                                                                    7      0   100%
 feedbacks/views.py                                                                  51      4    92%
 manage.py                                                                           11      2    82%
@@ -53,4 +53,4 @@ users/tests.py                                                                  
 users/urls.py                                                                       10      0   100%
 users/views.py                                                                      69     38    45%
 ----------------------------------------------------------------------------------------------------
-TOTAL                                                                              570     71    88%
+TOTAL                                                                              569     61    89%
