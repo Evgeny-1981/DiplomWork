@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
@@ -19,7 +21,7 @@ class AdTestCase(APITestCase):
             title="Тестовое объявление №1",
             price=1000,
             description="Тестовое описание об объявлении №1",
-            created_at="2024-12-04T15:00:00Z",
+            # created_at="2024-12-04T15:00:00Z",
             author=self.user,
         )
 
@@ -30,7 +32,7 @@ class AdTestCase(APITestCase):
             "title": "Тестовое объявление №2",
             "price": 2000,
             "description": "Тестовое описание об объявлении №2",
-            "created_at": "2024-12-04T16:00:00Z",
+            # "created_at": "2024-12-04T16:00:00Z",
             "author": self.user.pk,
         }
         response = self.client.post(url, data, format="json")
@@ -53,15 +55,14 @@ class AdTestCase(APITestCase):
                     "title": "Тестовое объявление №1",
                     "price": 1000,
                     "description": "Тестовое описание об объявлении №1",
-                    "created_at": self.ad.created_at,
+                    "created_at": datetime.isoformat(self.ad.created_at),
                     "author": self.user.pk,
                 }
             ],
         }
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # self.assertEqual(data, result)
+        self.assertEqual(data, result)
 
-    #
     def test_ad_retrieve(self):
         """Проверка корректности данных"""
         url = reverse("ads:ad_retrieve", args=(self.ad.pk,))
@@ -71,7 +72,7 @@ class AdTestCase(APITestCase):
         self.assertEqual(data["title"], self.ad.title)
         self.assertEqual(data["price"], self.ad.price)
         self.assertEqual(data["description"], self.ad.description)
-        # self.assertEqual(data["created_at"], self.ad.created_at)
+        self.assertEqual(data["created_at"], datetime.isoformat(self.ad.created_at))
         self.assertEqual(data["author"], self.user.pk)
 
     def test_ad_update(self):
