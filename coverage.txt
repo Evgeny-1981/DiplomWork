@@ -19,7 +19,7 @@ ads/migrations/__init__.py                                                      
 ads/models.py                                                                       16      0   100%
 ads/paginators.py                                                                    4      0   100%
 ads/serilazers.py                                                                   13      0   100%
-ads/tests.py                                                                        47      0   100%
+ads/tests.py                                                                        50      0   100%
 ads/urls.py                                                                          7      0   100%
 ads/views.py                                                                        43      2    95%
 config/__init__.py                                                                   0      0   100%
@@ -35,7 +35,7 @@ feedbacks/migrations/0002_alter_feedback_created_at_alter_feedback_text.py      
 feedbacks/migrations/__init__.py                                                     0      0   100%
 feedbacks/models.py                                                                 17      1    94%
 feedbacks/serilazers.py                                                              6      0   100%
-feedbacks/tests.py                                                                  49      0   100%
+feedbacks/tests.py                                                                  52      0   100%
 feedbacks/urls.py                                                                    7      0   100%
 feedbacks/views.py                                                                  51      4    92%
 manage.py                                                                           11      2    82%
@@ -53,4 +53,4 @@ users/tests.py                                                                  
 users/urls.py                                                                       10      0   100%
 users/views.py                                                                      69     35    49%
 ----------------------------------------------------------------------------------------------------
-TOTAL                                                                              584     58    90%
+TOTAL                                                                              590     58    90%
