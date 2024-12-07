@@ -6,7 +6,17 @@ from users.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "phone",
+            "email",
+            "role",
+            "image",
+            "token",
+            "uid",
+        )
 
 
 class PasswordResetRequestSerializer(serializers.ModelSerializer):
@@ -25,3 +35,7 @@ class PasswordResetRequestSerializer(serializers.ModelSerializer):
 
 class PasswordResetSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True, min_length=8)
+
+    class Meta:
+        model = User
+        fields = '__all__'
