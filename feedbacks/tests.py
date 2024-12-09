@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
@@ -19,7 +21,7 @@ class FeedbackTestCase(APITestCase):
             title="Тестовое объявление №1",
             price=1000,
             description="Тестовое описание об объявлении №1",
-            created_at="2024-12-04T15:00:00Z",
+            # created_at="2024-12-04T15:00:00Z",
             author=self.user,
         )
         self.feedback = Feedback.objects.create(
@@ -54,18 +56,18 @@ class FeedbackTestCase(APITestCase):
             "next": None,
             "previous": None,
             "results": [
-                # {
-                #     "id": self.feedback.pk,
-                #     "text": "Отзыв на тестовое объявление №1",
-                #     # "created_at": "2024-12-04T17:00:00Z",
-                #     "author": self.user.pk,
-                #     "ad": self.ad.pk,
-                # }
+                {
+                    "id": self.feedback.pk,
+                    "text": "Отзыв на тестовое объявление №1",
+                    "created_at": datetime.isoformat(self.feedback.created_at),
+                    "author": self.user.pk,
+                    "ad": self.ad.pk,
+                }
             ],
         }
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Feedback.objects.count(), 1)
-        # self.assertEqual(data, result)
+        self.assertEqual(data, result)
 
     def test_feedback_retrieve(self):
         """Проверка корректности данных"""
@@ -76,7 +78,9 @@ class FeedbackTestCase(APITestCase):
         self.assertEqual(data["text"], self.feedback.text)
         self.assertEqual(data["author"], self.user.pk)
         self.assertEqual(data["ad"], self.ad.pk)
-        # self.assertEqual(data["created_at"], self.feedback.created_at)
+        self.assertEqual(
+            data["created_at"], datetime.isoformat(self.feedback.created_at)
+        )
 
     def test_feedback_update(self):
         """Проверка обновления отзыва"""

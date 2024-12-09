@@ -100,18 +100,20 @@ class PasswordResetView(generics.GenericAPIView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        token = self.kwargs.get("token")
-        object_reset = User.objects.filter(token=token).first()
-        if not object_reset:
-            return Response("Неверный токен", status=400)
-        uid = self.kwargs.get("uid")
-        user = User.objects.filter(uid=uid).first()
-        if user:
-            password = request.data["new_password"]
-            user.set_password(password)
-            user.token = None
-            user.uid = None
-            user.save()
-            return Response("Пароль успешно обновлен")
-        else:
-            return Response("Пользователь не найден")
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            token = self.kwargs.get("token")
+            object_reset = User.objects.filter(token=token).first()
+            if not object_reset:
+                return Response("Неверный токен", status=400)
+            uid = self.kwargs.get("uid")
+            user = User.objects.filter(uid=uid).first()
+            if user:
+                password = request.data["new_password"]
+                user.set_password(password)
+                user.token = None
+                user.uid = None
+                user.save()
+                return Response("Пароль успешно обновлен")
+            else:
+                return Response("Пользователь не найден")
