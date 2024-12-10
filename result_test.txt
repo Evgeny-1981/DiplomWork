@@ -1,0 +1,2 @@
+Code coverage for Python, version 7.6.8 with C extension.  Use 'coverage help' for help.
+Full documentation is at https://coverage.readthedocs.io/en/7.6.8
