@@ -10,7 +10,7 @@ class TestRegisterUser(APITestCase):
         url = reverse("users:register")
         data = {
             "email": "test@test.ru",
-            "password": "test",
+            "password": "test1238",
         }
         response = self.client.post(url, data, format="json")
         data = response.json()

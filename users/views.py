@@ -29,9 +29,10 @@ class UserCreateAPIView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
 
     def perform_create(self, serializer):
-        user = serializer.save(is_active=True)
-        user.set_password(user.password)
-        user.save()
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.save(is_active=True)
+            user.set_password(user.password)
+            user.save()
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
