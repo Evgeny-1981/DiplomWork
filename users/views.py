@@ -73,7 +73,7 @@ class PasswordResetRequestView(generics.GenericAPIView):
             user.save()
             url = get_current_site(request)
             confirm_url = "users/reset_password_confirm"
-            # Отправляем письмо со ссылкой для сброса пароля
+            # Отправляем письмо с ссылкой для сброса пароля
             send_mail(
                 subject="Запрос сброса пароля с сайта {}".format(url),
                 message="Для сброса пароля перейдите по ссылке: http://{}/{}/{}/{}/".format(

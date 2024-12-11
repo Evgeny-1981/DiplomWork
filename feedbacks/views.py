@@ -1,7 +1,6 @@
 from django.http import Http404
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-
 from ads.models import Ad
 from ads.paginators import CustomPagination
 from ads.serilazers import AdDetailSerializer
@@ -16,7 +15,7 @@ class FeedbackCreateAPIView(generics.CreateAPIView):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
 
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         """Привязываем отзыв к автору и объявлению"""

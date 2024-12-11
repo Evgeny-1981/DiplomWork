@@ -1,7 +1,6 @@
 from rest_framework import generics
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
 from ads.models import Ad
 from ads.paginators import CustomPagination
 from ads.serilazers import AdSerializer
